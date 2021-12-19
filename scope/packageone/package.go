@@ -1,7 +1,9 @@
 package packageone
 
-var privateVar = "I'm a private var"
-var PublicVar = "I'm public (or exported)"
+import "fmt"
 
-// In GoLang variables starting with capital letter as first letter, means it's exported, it's available outside this package
-// privateVar - with Lower case is available only inside this package
+var PackageVar = "Hello, I'm a package level variable in the package.packageone =^.^= "
+
+func PrintMe(s1, s2 string) {
+	fmt.Println(s1, s2, PackageVar)
+}
