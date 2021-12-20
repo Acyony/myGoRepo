@@ -11,20 +11,32 @@ import (
 // package level var
 var reader *bufio.Reader
 
+// creating a new type of variable => User
+type User struct {
+	UserName  string
+	Age       int
+	FavNumber float64
+}
+
 func main() {
 	reader = bufio.NewReader(os.Stdin)
-	userName := readString("What is your name?")
-	if userName == "" {
+
+	var user User
+
+	user.UserName = readString("What is your name?")
+	if user.UserName == "" {
 		fmt.Println("Please enter a valid name!")
 		return
 	}
 
-	age := readInt("How old are you?")
-	//fmt.Println("Your name is: "+userName+". You are", age, "years old.")
-	//fmt.Println(fmt.Sprintf("Your name is %s. You are %d years old.", userName, age))
-	
+	user.Age = readInt("How old are you?")
+	user.FavNumber = readFloat("What is your favourite number?")
+
 	// This way uses less memory, and it's much faster
-	fmt.Printf("Your name is %s. You are %d years old. \n", userName, age)
+	fmt.Printf("Your name is %s, and you are %d years old. Your favourite number is %.2f.",
+		user.UserName,
+		user.Age,
+		user.FavNumber)
 }
 
 func prompt() {
@@ -67,6 +79,23 @@ func readInt(str string) int {
 		num, err := strconv.Atoi(userInput)
 		if err != nil {
 			fmt.Println("Please enter a whole number!")
+		} else {
+			return num
+		}
+	}
+}
+
+func readFloat(str string) float64 {
+	for {
+		fmt.Println(str)
+		prompt()
+		userInput, _ := reader.ReadString('\n')
+		userInput = strings.Replace(userInput, "\r\n", "", -1)
+		userInput = strings.Replace(userInput, "\n", "", -1)
+		// convert str into a number
+		num, err := strconv.ParseFloat(userInput, 64)
+		if err != nil {
+			fmt.Println("Please enter a number!")
 		} else {
 			return num
 		}
