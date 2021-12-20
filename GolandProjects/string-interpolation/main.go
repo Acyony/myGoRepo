@@ -3,6 +3,8 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/eiannone/keyboard"
+	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -16,6 +18,7 @@ type User struct {
 	UserName  string
 	Age       int
 	FavNumber float64
+	OwnsADog  bool
 }
 
 func main() {
@@ -31,12 +34,14 @@ func main() {
 
 	user.Age = readInt("How old are you?")
 	user.FavNumber = readFloat("What is your favourite number?")
-
+	user.OwnsADog = readBoll("Do you own a dog (y/n)?")
 	// This way uses less memory, and it's much faster
-	fmt.Printf("Your name is %s, and you are %d years old. Your favourite number is %.2f.",
+	fmt.Printf("Your name is %s, and you are %d years old. Your favourite number is %.2f. Owns a dog: %t.",
 		user.UserName,
 		user.Age,
-		user.FavNumber)
+		user.FavNumber,
+		user.OwnsADog,
+	)
 }
 
 func prompt() {
@@ -100,4 +105,36 @@ func readFloat(str string) float64 {
 			return num
 		}
 	}
+}
+
+// to read a boolean
+
+func readBoll(str string) bool {
+	err := keyboard.Open()
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	// to close the keyboard
+
+	defer func() {
+		_ = keyboard.Close()
+	}()
+
+	for {
+		fmt.Println(str)
+		char, _, err := keyboard.GetSingleKey()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if strings.ToLower(string(char)) != "y" && strings.ToLower(string(char)) != "n" {
+			fmt.Println("Please type  y or n")
+		} else if char == 'n' || char == 'N' {
+			return false
+		} else if char == 'y' || char == 'Y' {
+			return true
+		}
+	}
+
 }
