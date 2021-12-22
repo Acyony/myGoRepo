@@ -2,28 +2,26 @@ package main
 
 import "fmt"
 
-// aggregate types(array, struct)
-// struct is considered an aggregate type, because it can hold many pieces of information
 // reference types(pointers, slices, maps, functions, channels)
+// pointers => something that points to a specific location  in memory
 // interface type
 
-type Car struct {
-	NumberOfTires int
-	Luxury        bool
-	BucketSeats   bool
-	Make          string
-	Model         string
-	Year          int
+func main() {
+	x := 10
+	// hold the address where x is storage in the memory
+	// &x reference to a pointer
+	// *myFirstPointer to get the value and change it
+
+	myFirstPointer := &x
+	fmt.Println("x is", x)
+	fmt.Println("myFirstPointer is", myFirstPointer)
+
+	*myFirstPointer = 15
+	fmt.Println("x is now", x)
+	changeValueOfPointer(&x)
+	fmt.Println("After function call, x is now", x)
 }
 
-func main() {
-	myCar := Car{
-		NumberOfTires: 4,
-		Luxury:        true,
-		BucketSeats:   true,
-		Make:          "Volvo",
-		Model:         "XX2021",
-		Year:          2021,
-	}
-	fmt.Printf("My car is a %d %s %s", myCar.Year, myCar.Make, myCar.Model)
+func changeValueOfPointer(num *int) {
+	*num = 25
 }
