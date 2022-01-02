@@ -46,11 +46,46 @@ func main() {
 
 		i, _ := strconv.Atoi(string(char))
 
-		_, ok := coffees[i]
-		if ok {
+		/*	_, ok := coffees[i]
+			if ok {
+				fmt.Println(fmt.Sprintf("You chose %s", coffees[i]))
+			}*/
+
+		// another way to write the code
+		if _, ok := coffees[i]; ok {
 			fmt.Println(fmt.Sprintf("You chose %s", coffees[i]))
 		}
 	}
+
+	for {
+		char, _, err = keyboard.GetSingleKey()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if char == 'q' || char == 'Q' {
+			break
+		}
+
+		i, _ := strconv.Atoi(string(char))
+
+		if _, ok := coffees[i]; ok {
+			fmt.Println(fmt.Sprintf("You chose %s", coffees[i]))
+		}
+	}
+
+	/*for ok := true; ok; ok = char != 'q' && char != 'Q' {
+		char, _, err = keyboard.GetSingleKey()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		i, _ := strconv.Atoi(string(char))
+
+		if _, ok := coffees[i]; ok {
+			fmt.Println(fmt.Sprintf("You chose %s", coffees[i]))
+		}
+	}*/
 
 	fmt.Println("Program exiting...")
 }
