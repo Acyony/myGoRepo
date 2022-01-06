@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func main() {
 	/*answer := 7 + 3*8
 	fmt.Println("Answer =", answer)
@@ -79,7 +77,7 @@ func main() {
 	z = 12 + (3 * 4)
 	fmt.Println("x =", x, "y =", y, "z =", z)*/
 
-	// modulus operator
+	/*// modulus operator
 
 	x := 12
 	y := 5
@@ -89,10 +87,53 @@ func main() {
 		fmt.Println(y, " doesn't divide exactly into ", x)
 	}
 
-	/*thisMonth := 1
-	fmt.Println("The month after", thisMonth, "is", thisMonth+1)*/
+	thisMonth := 1
+	fmt.Println("The month after", thisMonth, "is", thisMonth+1)
 
 	for m := 1; m <= 12; m++ {
 		fmt.Println("The month after", m, "is", m%12+1)
+	}*/
+
+	// relational and conditional operators
+
+	/*second := 31
+	minute := 1
+
+	if (minute < 59) && ((second + 1) > 59) {
+		minute++
 	}
+
+	fmt.Println(minute)*/
+
+	/*a := 12
+	b := 5*/
+	/*
+		if b != 0 {
+			c := divideTwoNumbers(a, b)
+
+			if c == 2 {
+				fmt.Println("we found a two")
+			}
+		} else {
+			fmt.Println("You are dividing by 0!")
+		}*/
+
+	/*c, err := divideTwoNumbers(a, b)
+
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		if c == 2 {
+			fmt.Println("We found 2!")
+		}
+	}*/
+
 }
+
+/*
+func divideTwoNumbers(x, y int) (int, error) {
+	if y == 0 {
+		return 0, errors.New("cannot divide by 0")
+	}
+	return x / y, nil
+}*/
