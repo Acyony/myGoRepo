@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func main() {
 	/*answer := 7 + 3*8
 	fmt.Println("Answer =", answer)
@@ -127,6 +129,16 @@ func main() {
 			fmt.Println("We found 2!")
 		}
 	}*/
+
+	i := 0
+
+	for {
+		i++
+		if i > 3 {
+			break
+		}
+		fmt.Println("i is", i)
+	}
 
 }
 
