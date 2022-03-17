@@ -1,0 +1,56 @@
+
+.background {
+    width: 700px;
+    height: 375px;
+    background: #290f6f;
+    margin: 3rem auto 0 auto;
+    height: 70vh;
+    font-family: 'Fredoka', sans-serif;
+    padding: 2rem;
+}
+
+.taskBody {
+    margin-top: 1.5rem;
+    height: 60vh;
+    width: 30vw;
+    /*background: rgba( 74, 144, 226, 0.25 );*/
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: #4685d3;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    background: #290f6f;
+    border-radius: 10px;
+    color: whitesmoke;
+    padding: 1.5rem 1rem;
+}
+
+.taskCheckbox {
+    margin-right: 1rem;
+}
+
+.title {
+    padding: 1rem;
+
+}
+
+.inputAddNewTask input{
+    width: 75%;
+    margin-right: 3rem;
+}
+
+p {
+    color: black;
+}
+
+button {
+    background: #ea06ff;
+    border: none;
+    border-radius: 5px;
+}
