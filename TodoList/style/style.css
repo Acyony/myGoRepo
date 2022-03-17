@@ -33,6 +33,8 @@
 
 .taskCheckbox {
     margin-right: 1rem;
+    height: 25px;
+    width: 25px;
 }
 
 
@@ -45,7 +47,7 @@
 
 .title {
     padding: 1rem;
-
+    font-size: 1.5rem;
 }
 
 .inputAddNewTask input {
@@ -57,7 +59,7 @@ p {
     color: black;
 }
 
-.buttonStyle1{
+.buttonStyle1 {
     width: 8vh;
 }
 
@@ -66,4 +68,15 @@ p {
     background: #ea06ff;
     border: none;
     border-radius: 5px;
+}
+
+.pendingTasks {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pendingTasksWrap {
+    margin-right: 3rem;
 }
