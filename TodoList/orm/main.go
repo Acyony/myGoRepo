@@ -86,4 +86,24 @@ func main() {
 		http.Redirect(writer, request, "/", http.StatusTemporaryRedirect)
 	})
 
+	http.HandleFunc("/new-todo", func(writer http.ResponseWriter, request *http.Request) {
+		if request.Method != "POST" {
+			http.Redirect(writer, request, "/", http.StatusPermanentRedirect)
+			return
+		}
+
+		title := request.FormValue("title")
+
+		if err := AddNewTodo(db, title); err != nil {
+			http.Error(writer, "Internal Server Error", http.StatusInternalServerError)
+			return
+		}
+
+		http.Redirect(writer, request, "/", http.StatusTemporaryRedirect)
+	})
+
+	if err := http.ListenAndServe(":9090", nil); err != nil {
+		panic(err.Error())
+	}
+
 }
