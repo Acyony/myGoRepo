@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"net/http"
+	"strconv"
+	"text/template"
 	"time"
 )
 
@@ -47,4 +50,40 @@ func main() {
 	if err := db.AutoMigrate(&Todo{}); err != nil {
 		panic(fmt.Sprintf("not able to create a table: %s", err.Error()))
 	}
+
+	http.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
+		todos, err := ListTodos(db)
+		if err != nil {
+			http.Error(writer, "Internal Server Error", http.StatusInternalServerError)
+			return
+		}
+
+		indexTmpl := template.Must(template.ParseFiles("template/index.gohtml"))
+		writer.Header().Set("Content-Type", "text/html")
+
+		_ = indexTmpl.Execute(writer, todos)
+	})
+
+	http.HandleFunc("/done-todo", func(writer http.ResponseWriter, request *http.Request) {
+		if request.Method != "Post" {
+			http.Redirect(writer, request, "/", http.StatusPermanentRedirect)
+			return
+		}
+
+		idStr := request.FormValue("id")
+		id, err := strconv.Atoi(idStr)
+
+		if err != nil {
+			http.Error(writer, "id must be a number", http.StatusBadRequest)
+			return
+		}
+
+		if err := CompleteTodo(db, id); err != nil {
+			http.Error(writer, "Internal Server Error", http.StatusInternalServerError)
+			return
+		}
+
+		http.Redirect(writer, request, "/", http.StatusTemporaryRedirect)
+	})
+
 }
