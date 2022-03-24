@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"time"
 )
@@ -35,5 +37,14 @@ func AddNewTodo(db *gorm.DB, title string) error {
 	return result.Error
 }
 func main() {
+	//connect to the sqlite database
+	db, err := gorm.Open(sqlite.Open("database_gorm.sqlite3"), &gorm.Config{})
+	if err != nil {
+		panic(fmt.Sprintf("not able to connect to database: %s", err.Error()))
+	}
 
+	// create the required tables
+	if err := db.AutoMigrate(&Todo{}); err != nil {
+		panic(fmt.Sprintf("not able to create a table: %s", err.Error()))
+	}
 }
